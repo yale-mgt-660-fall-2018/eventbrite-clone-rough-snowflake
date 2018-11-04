@@ -1,0 +1,3 @@
+Your wiki was closed, so here's the feedback: 
+* Your burndown chart is difficult to understand. 
+* Please have user stories, but the descriptions were very good and I did give you credit for that. 
