@@ -43,8 +43,50 @@ async function getByLocation(db, searchString) {
     return db.oneOrNone(stmt, [searchString]);
 }
 
+async function getById(db, id) {
+    // See pgpromise documentation for this ":value" syntax
+    // and why it is used.
+    const stmt = `
+        SELECT * FROM events WHERE
+        id = $1
+    `;
+    return db.any(stmt, [id]);
+}
+
+async function getAllEvents(db) {
+    // See pgpromise documentation for this ":value" syntax
+    // and why it is used.
+    const stmt = `
+        SELECT * FROM events 
+    `;
+    return db.any(stmt, []);
+}
+
+async function getAttendees(db, id) {
+    // See pgpromise documentation for this ":value" syntax
+    // and why it is used.
+    const stmt = `
+        SELECT * FROM attendees WHERE
+        event_id = $1
+    `;
+    return db.any(stmt, [id]);
+}
+async function addAttendee(db, params) {
+    // See pgpromise documentation for this ":value" syntax
+    // and why it is used.
+    const stmt = `
+        INSERT INTO attendees (event_id, email) 
+        VALUES ($1, '$2:value')
+    `;
+    return db.any(stmt, params);
+}
+
 module.exports = {
     insert,
     count,
     getByLocation,
+    getById,
+    getAllEvents,
+    getAttendees,
+    addAttendee
 };

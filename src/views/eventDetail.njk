@@ -1,0 +1,24 @@
+{% extends "template.njk" %}
+
+{% block title %}Create a New Event{% endblock %}
+
+
+{% block body %}
+    
+    <div> {{eventDetails.title}} </div>
+    <div> {{eventDetails.location}} </div>
+    <div> {{eventDetails.date}} </div>
+    <div> {{eventDetails.image_url}} </div>
+    
+    {% for attendee in attendees %}
+        <li>{{attendee.email}}</li>
+    {% endfor %}
+    
+    <form action="/events/{{eventDetails.id}}" method="post">
+    <input name="email" type="text"/>
+    <br />
+    <button type="submit" name="submit" class="btn">Submit</button>
+
+</form>
+    
+{% endblock %}
