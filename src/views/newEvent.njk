@@ -1,0 +1,22 @@
+{% extends "template.njk" %}
+
+{% block title %}Create a New Event{% endblock %}
+
+
+{% block body %}
+    <form action="/events/new" method="post">
+    <label for="title">Title</label>
+    <input name="title" type="text"/>
+    <br />
+    <label for="location">Location</label>
+    <input name="location" type="text"/>
+    <br />
+    <label for="image">Image</label>
+    <input name="image" type="text"/>
+    <br />
+    <label for="date">Date</label>
+    <input name="date" type="datetime"/>
+    <br />
+    <button type="submit" name="submit" class="btn">Submit</button>
+    </form>
+{% endblock %}

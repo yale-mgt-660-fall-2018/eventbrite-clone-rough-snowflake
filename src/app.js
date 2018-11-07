@@ -8,6 +8,7 @@ const nunjucks = require('nunjucks');
 const nunjucksEnvironment = new nunjucks.Environment(
     new nunjucks.FileSystemLoader(path.join(__dirname, './views'))
 );
+const init = require('./models/init.js');
 
 
 /**
@@ -24,10 +25,10 @@ function createApp(config) {
     // Add the database to the app's context prototype.
     // This will make the db available in all controllers.
     app.context.db = pgp(config.databaseURL);
-
+    init.createSchema(app.context.db);
     // Set the port for the app
     app.context.port = config.port;
-
+    
     // Add view/template engine
     app.use(views(path.join(__dirname, 'views'), {
         extension: 'njk',
