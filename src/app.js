@@ -4,6 +4,11 @@ const views = require('koa-views');
 const bodyParser = require('koa-bodyparser');
 const path = require('path');
 const router = require('./routes/routes.js');
+const nunjucks = require('nunjucks');
+const nunjucksEnvironment = new nunjucks.Environment(
+    new nunjucks.FileSystemLoader(path.join(__dirname, './views'))
+);
+
 
 /**
  * createApp - returns a Koa application given a config
@@ -25,7 +30,11 @@ function createApp(config) {
 
     // Add view/template engine
     app.use(views(path.join(__dirname, 'views'), {
-        map: { njk: 'nunjucks' },
+       extension: 'njk',
+       options: {
+        nunjucksEnv: nunjucksEnvironment
+       },
+       map: { njk: 'nunjucks' },
     }));
 
     // Attach our routes.
