@@ -13,7 +13,6 @@ async function index(ctx) {
 async function index1(ctx) {
    
     const r = await eventsModel.insert(ctx.db,ctx.request.body.title,ctx.request.body.date,ctx.request.body.image,ctx.request.body.location);
-    const template = 'index.njk';
     ctx.redirect('/events/'+(r.id));
 }
 
