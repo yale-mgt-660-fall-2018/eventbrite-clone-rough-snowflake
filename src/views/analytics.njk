@@ -19,7 +19,13 @@
     {% for record in r %}
         <tr>
         <td>    {{ record.referer }}            </td>
-        <td>    {{ record.case }}               </td>
+        <td>
+            {% if record.case == 0 %}
+                Support
+            {% else %}
+                Donate
+            {% endif %}
+        </td>
         <td>    {{ record.count_home }}         </td>
         <td>    {{ record.count_event }}        </td>
         <td>    {{ record.count_newevent }}     </td>
