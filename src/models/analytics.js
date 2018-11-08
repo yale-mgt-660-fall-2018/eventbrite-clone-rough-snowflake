@@ -1,6 +1,5 @@
 async function getSessionId(ctx, page) {
    const x = await get_user(ctx.db, ctx.session.user);
-  console.log(ctx.headers);
    if (x.length==0) {
         const r = await insert_user(ctx.db, ctx.headers.referer || 'null');
         await insert_pageview(ctx.db, r.id, page);
@@ -13,6 +12,7 @@ async function getSessionId(ctx, page) {
         console.log("inserted pageview "+page+" for user "+ctx.session.user);
         // user has already logged in
     } 
+    return ctx.session.user;
 }
 
 async function insert_user(db, referer) {
@@ -51,12 +51,12 @@ async function insert_pageview(db, user_id, page) {
 
 async function get_analytics(db){
     const stmt = `
-        SELECT referer , SUM(CASE WHEN p='home' THEN 1 ELSE 0 END) AS count_home, SUM(CASE WHEN p='event' THEN 1 ELSE 0 END) AS count_event ,  
+        SELECT referer , mod(users.id,2) AS case,SUM(CASE WHEN p='home' THEN 1 ELSE 0 END) AS count_home, SUM(CASE WHEN p='event' THEN 1 ELSE 0 END) AS count_event ,  
         SUM(CASE WHEN p='new_event' THEN 1 ELSE 0 END) AS count_newevent, SUM(CASE WHEN p='about' THEN 1 ELSE 0 END) AS count_about,
         SUM(CASE WHEN p='donate' THEN 1 ELSE 0 END) AS count_donate, SUM(CASE WHEN p='create_event' THEN 1 ELSE 0 END) AS count_createevent,
         SUM(CASE WHEN p='add_attendee' THEN 1 ELSE 0 END) AS count_addattendee
         FROM users LEFT JOIN pageviews on users.id = pageviews.user_id
-        GROUP BY referer;
+        GROUP BY referer, mod(users.id,2);
     `;
     return db.any(stmt, []);
 }

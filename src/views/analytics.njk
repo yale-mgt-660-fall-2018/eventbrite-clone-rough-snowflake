@@ -6,6 +6,7 @@
     <table>
     <tr>
     <td>    Referer             </td>
+    <td>    Case                </td>
     <td>    Home Visits         </td>
     <td>    Event Page Visits   </td>
     <td>    New Event Visits    </td>
@@ -18,6 +19,7 @@
     {% for record in r %}
         <tr>
         <td>    {{ record.referer }}            </td>
+        <td>    {{ record.case }}               </td>
         <td>    {{ record.count_home }}         </td>
         <td>    {{ record.count_event }}        </td>
         <td>    {{ record.count_newevent }}     </td>
