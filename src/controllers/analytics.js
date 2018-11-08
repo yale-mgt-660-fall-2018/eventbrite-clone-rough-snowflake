@@ -7,7 +7,6 @@ const analyticsModel = require('../models/analytics.js');
 async function analytics(ctx) {
     const template = 'analytics.njk';
     const r = await analyticsModel.get_analytics(ctx.db);
-    console.log(r);
     return ctx.render(template, { r });
 }
 

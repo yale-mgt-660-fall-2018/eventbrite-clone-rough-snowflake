@@ -1,7 +1,7 @@
 async function getSessionId(ctx, page) {
    const x = await get_user(ctx.db, ctx.session.user);
+  console.log(ctx.headers);
    if (x.length==0) {
-        
         const r = await insert_user(ctx.db, ctx.headers.referer || 'null');
         await insert_pageview(ctx.db, r.id, page);
         ctx.session.user = r.id;
