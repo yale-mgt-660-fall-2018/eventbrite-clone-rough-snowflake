@@ -4,6 +4,17 @@
 
 {% block body %}
 
+    <tr>
+    <td>Referer</td>
+    <td>Home Visits</td>
+    <td>Event Page Visits</td>
+    <td>New Event Visits</td>
+    <td>About Visits</td>
+    <td>Donate Visits</td>
+    <td>Created New Event</td>
+    <td>Added Attendee</td>
+    </tr>
+
     {% for record in r %}
         <tr>
         <td>{{ record.referer }}</td>
@@ -14,6 +25,7 @@
         <td>{{ record.count_donate }}</td>
         <td>{{ record.count_createevent }}</td>
         <td>{{ record.count_addattendee }}</td>
+        </tr>
         
     {% endfor %}
 
