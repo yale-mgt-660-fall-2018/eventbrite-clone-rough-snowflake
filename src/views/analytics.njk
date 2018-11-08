@@ -5,7 +5,16 @@
 {% block body %}
 
     {% for record in r %}
-        {{ record }}
+        <tr>
+        <td>{{ record.referer }}</td>
+        <td>{{ record.count_home }}</td>
+        <td>{{ record.count_event }}</td>
+        <td>{{ record.count_newevent }}</td>
+        <td>{{ record.count_about }}</td>
+        <td>{{ record.count_donate }}</td>
+        <td>{{ record.count_createevent }}</td>
+        <td>{{ record.count_addattendee }}</td>
+        
     {% endfor %}
 
 {% endblock %}
