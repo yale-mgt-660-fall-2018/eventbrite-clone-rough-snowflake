@@ -27,6 +27,19 @@ CREATE TABLE IF NOT EXISTS attendees (
     email TEXT,
     UNIQUE(event_id,email)
 );
+
+DROP TABLE IF EXISTS users CASCADE;
+CREATE TABLE IF NOT EXISTS users (
+    id serial PRIMARY KEY,
+    referer TEXT NOT NULL
+);
+
+DROP TABLE IF EXISTS pageviews CASCADE;
+DROP TABLE IF EXISTS views CASCADE;
+CREATE TABLE IF NOT EXISTS pageviews (
+    user_id INT NOT NULL,
+    p TEXT NOT NULL
+);
 -- Turn on verbose error messages, which helps our JavaScript
 -- code handle database errors in a graceful manner.
 --SET log_error_verbosity TO 'verbose';

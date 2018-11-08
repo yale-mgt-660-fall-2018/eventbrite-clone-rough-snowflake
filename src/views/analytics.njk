@@ -1,0 +1,11 @@
+{% extends "template.njk" %}
+
+{% block title %}Analytics{% endblock %}
+
+{% block body %}
+
+    {% for record in r %}
+        {{ record }}
+    {% endfor %}
+
+{% endblock %}
