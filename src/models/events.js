@@ -6,6 +6,7 @@
  * @param  {String} location - Location of the event
  * @returns {Promise} - Promise that resolves to new row in db.
  */
+ 
 async function insert(db, title, date, imageURL, location) {
     // Notice that our JavaScript variables are CamelCase
     // and our SQL variables are snake_case. This is a
