@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS events (
 --DROP TABLE IF EXISTS attendees CASCADE;
 CREATE TABLE IF NOT EXISTS attendees (
     event_id INT NOT NULL,
-    email TEXT,
+    email TEXT
+     CHECK (email ~ '/@yale.edu\s*$/' ),
     UNIQUE(event_id,email)
 );
 -- Turn on verbose error messages, which helps our JavaScript
