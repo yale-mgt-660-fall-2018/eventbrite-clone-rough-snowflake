@@ -10,6 +10,11 @@ async function about(ctx) {
     return ctx.render(template, { });
 }
 
+function about (request, response) {
+    console.log('in about function');
+    
+    nicknames = distinct-hyena, fair-barracuda, healthy-reindeer, cheerful-penguin
+
 module.exports = {
     about,
 };
