@@ -5,9 +5,9 @@
 
 {% block body %}
 
-    <div id="errors">
+    <ul class="form-errors">
         {{error}}
-    </div>
+    </ul>
     <form action="/events/new" method="post">
     <label for="title">Title</label>
         <input name="title" type="text"/>

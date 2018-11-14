@@ -4,12 +4,12 @@ async function getSessionId(ctx, page) {
         const r = await insert_user(ctx.db, ctx.headers.referer || 'null');
         await insert_pageview(ctx.db, r.id, page);
         ctx.session.user = r.id;
-        console.log("inserted user "+r.id+" and pageview "+page);
+        // console.log("inserted user "+r.id+" and pageview "+page);
         // user has not logged in
     } 
     else {
         await insert_pageview(ctx.db, ctx.session.user, page);
-        console.log("inserted pageview "+page+" for user "+ctx.session.user);
+        // console.log("inserted pageview "+page+" for user "+ctx.session.user);
         // user has already logged in
     } 
     return ctx.session.user;
