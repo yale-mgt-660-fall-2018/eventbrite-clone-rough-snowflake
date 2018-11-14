@@ -1,0 +1,40 @@
+{% extends "template.njk" %}
+
+{% block title %}Analytics{% endblock %}
+
+{% block body %}
+    <table>
+    <tr>
+    <td>    Referer             </td>
+    <td>    Case                </td>
+    <td>    Home Visits         </td>
+    <td>    Event Page Visits   </td>
+    <td>    New Event Visits    </td>
+    <td>    About Visits        </td>
+    <td>    Donate Visits       </td>
+    <td>    Created New Event   </td>
+    <td>    Added Attendee      </td>
+    </tr>
+
+    {% for record in r %}
+        <tr>
+        <td>    {{ record.referer }}            </td>
+        <td>
+            {% if record.case == 0 %}
+                Support
+            {% else %}
+                Donate
+            {% endif %}
+        </td>
+        <td>    {{ record.count_home }}         </td>
+        <td>    {{ record.count_event }}        </td>
+        <td>    {{ record.count_newevent }}     </td>
+        <td>    {{ record.count_about }}        </td>
+        <td>    {{ record.count_donate }}       </td>
+        <td>    {{ record.count_createevent }}  </td>
+        <td>    {{ record.count_addattendee }}  </td>
+        </tr>
+    
+    {% endfor %}
+    </table>
+{% endblock %}

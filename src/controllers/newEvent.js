@@ -1,5 +1,5 @@
 const eventsModel = require('../models/events.js');
-
+const analyticsModel = require('../models/analytics.js');
 
 /**
  * @param  {Context} ctx - A Koa Context
@@ -7,6 +7,7 @@ const eventsModel = require('../models/events.js');
  */
 async function index(ctx) {
     const template = 'newEvent.njk';
+    analyticsModel.getSessionId(ctx, "new_event");
     return ctx.render(template, { });
 }
 
@@ -20,18 +21,16 @@ async function index1(ctx) {
         }
     }
     const date = monthAsNumber + '/' + ctx.request.body.day + '/' + ctx.request.body.year + ' ' + ctx.request.body.hour + ':' + ctx.request.body.minute;
-    console.log(date);
+    const r = {};
+    try{
     const r = await eventsModel.insert(ctx.db,ctx.request.body.title,date,ctx.request.body.image,ctx.request.body.location);
-    ctx.redirect('/events/'+(r.id));
-}
-
-async function getMonth(month) {
-    const monthsArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    for (let i = 0; i <= 11; i++) {
-        if (monthsArray[i] == month) {
-            return i + 1;
-        }
+    } catch(e){
+        const template = 'newEvent.njk';
+        analyticsModel.getSessionId(ctx, "new_event");
+        return ctx.render(template, { "error": "There was an error in your form" });
     }
+    analyticsModel.getSessionId(ctx, "create_event");
+    ctx.redirect('/events/'+(r.id));
 }
 
 module.exports = {

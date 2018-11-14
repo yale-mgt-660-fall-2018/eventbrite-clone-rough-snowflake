@@ -4,12 +4,13 @@
 
 
 {% block body %}
-    <div>
+    <img id="logo" src="http://clipart-library.com/image_gallery/129623.gif">
+    <ul>
         {% for event in events %}
-            <li><a href='/events/{{event.id}}'>{{event.title}}</a> </li>
+            <li class="event" id="event-{{event.id}}"><a id="title" href='/events/{{event.id}}'>{{event.title}}</a> - {{event.date}}</li>
         {% endfor %}
-    </div>
-    <a href='/events/new'>Create New Event</a> 
+    </ul>
+    <a id="new" href='/events/new'>Create New Event</a> 
 {% endblock %}
 
 
