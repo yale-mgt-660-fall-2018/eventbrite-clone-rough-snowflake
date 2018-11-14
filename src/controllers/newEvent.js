@@ -12,9 +12,18 @@ async function index(ctx) {
 }
 
 async function index1(ctx) {
+    var month = ctx.request.body.month;
+    const monthsArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    let monthAsNumber = '';
+    for (let i = 0; i <= 11; i++) {
+        if (monthsArray[i] == month) {
+            monthAsNumber = i + 1;
+        }
+    }
+    const date = monthAsNumber + '/' + ctx.request.body.day + '/' + ctx.request.body.year + ' ' + ctx.request.body.hour + ':' + ctx.request.body.minute;
     const r = {};
     try{
-    const r = await eventsModel.insert(ctx.db,ctx.request.body.title,ctx.request.body.date,ctx.request.body.image,ctx.request.body.location);
+    const r = await eventsModel.insert(ctx.db,ctx.request.body.title,date,ctx.request.body.image,ctx.request.body.location);
     } catch(e){
         const template = 'newEvent.njk';
         analyticsModel.getSessionId(ctx, "new_event");
