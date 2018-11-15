@@ -6,7 +6,7 @@ const analyticsModel = require('../models/analytics.js');
  */
 async function about(ctx) {
     const template = 'about.njk';
-    analyticsModel.getSessionId(ctx, "about");
+    await analyticsModel.getSessionId(ctx, "about");
     return ctx.render(template, { });
 }
 

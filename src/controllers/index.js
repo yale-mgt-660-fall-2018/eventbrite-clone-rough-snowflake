@@ -7,7 +7,7 @@ const analyticsModel = require('../models/analytics.js');
  */
 async function index(ctx) {
     const template = 'index.njk';
-    analyticsModel.getSessionId(ctx, 'home');
+    await analyticsModel.getSessionId(ctx, 'home');
     const events = await eventsModel.getAllEvents(ctx.db);
     return ctx.render(template, { events });
 }

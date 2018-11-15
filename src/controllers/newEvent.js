@@ -7,7 +7,7 @@ const analyticsModel = require('../models/analytics.js');
  */
 async function index(ctx) {
     const template = 'newEvent.njk';
-    analyticsModel.getSessionId(ctx, "new_event");
+    await analyticsModel.getSessionId(ctx, "new_event");
     return ctx.render(template, { });
 }
 
@@ -25,7 +25,7 @@ async function index1(ctx) {
     var r;
     if (ctx.request.body.title == "" || ctx.request.body.location == "" || ctx.request.body.image == ""){
         const template = 'newEvent.njk';
-        analyticsModel.getSessionId(ctx, "new_event");
+        await analyticsModel.getSessionId(ctx, "new_event");
         return ctx.render(template, { "error": "There was an error in your form" });
     }
     
@@ -33,10 +33,10 @@ async function index1(ctx) {
         r = await eventsModel.insert(ctx.db,ctx.request.body.title,date,ctx.request.body.image,ctx.request.body.location);
     } catch(e){
          const template = 'newEvent.njk';
-         analyticsModel.getSessionId(ctx, "new_event");
+         await analyticsModel.getSessionId(ctx, "new_event");
          return ctx.render(template, { "error": "There was an error in your form" });
     }
-    analyticsModel.getSessionId(ctx, "create_event");
+    await analyticsModel.getSessionId(ctx, "create_event");
     ctx.redirect('/events/'+(r.id));
 }
 
