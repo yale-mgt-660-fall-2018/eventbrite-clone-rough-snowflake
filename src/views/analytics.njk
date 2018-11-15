@@ -3,6 +3,8 @@
 {% block title %}Analytics{% endblock %}
 
 {% block body %}
+    <h1>Pageviews</h1>
+    
     <table>
     <tr>
     <td>    Referer             </td>
@@ -37,4 +39,22 @@
     
     {% endfor %}
     </table>
+    
+    <h1>users</h1>
+    
+    <table>
+    <tr>
+    <td>    user_id             </td>
+    <td>    referer                </td>
+    </tr>
+
+    {% for user in u %}
+        <tr>
+        <td>    {{ user.id }}            </td>
+        <td>    {{ user.referer }}         </td>
+        </tr>
+    
+    {% endfor %}
+    </table>
+    
 {% endblock %}

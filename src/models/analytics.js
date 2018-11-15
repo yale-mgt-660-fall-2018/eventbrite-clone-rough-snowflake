@@ -61,10 +61,19 @@ async function get_analytics(db){
     return db.any(stmt, []);
 }
 
+async function get_users(db){
+    const stmt = `
+        SELECT *
+        FROM users;
+    `;
+    return db.any(stmt, []);
+}
+
 module.exports = {
     getSessionId,
     insert_user,
     insert_pageview,
     get_user,
-    get_analytics
+    get_analytics,
+    get_users
 };

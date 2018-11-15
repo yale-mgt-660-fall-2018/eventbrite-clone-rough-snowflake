@@ -7,7 +7,8 @@ const analyticsModel = require('../models/analytics.js');
 async function analytics(ctx) {
     const template = 'analytics.njk';
     const r = await analyticsModel.get_analytics(ctx.db);
-    return ctx.render(template, { r });
+    const u = await analyticsModel.get_users(ctx.dv);
+    return ctx.render(template, { r , u });
 }
 
 module.exports = {
