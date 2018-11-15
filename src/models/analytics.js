@@ -12,7 +12,7 @@ async function getSessionId(ctx, page) {
         // console.log("inserted pageview "+page+" for user "+ctx.session.user);
         // user has already logged in
     } 
-    return ctx.session.user;
+    return ctx.session.user; 
 }
 
 async function insert_user(db, referer) {
