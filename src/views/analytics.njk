@@ -5,17 +5,17 @@
 {% block body %}
     <h1>Pageviews</h1>
     
-    <table>
+    <table class="table table-bordered">
     <tr>
-    <td>    Referer             </td>
-    <td>    Case                </td>
-    <td>    Home Visits         </td>
-    <td>    Event Page Visits   </td>
-    <td>    New Event Visits    </td>
-    <td>    About Visits        </td>
-    <td>    Donate Visits       </td>
-    <td>    Created New Event   </td>
-    <td>    Added Attendee      </td>
+    <th scope="col">    Referer             </td>
+    <th scope="col">    Case                </td>
+    <th scope="col">    Home Visits         </td>
+    <th scope="col">    Event Page Visits   </td>
+    <th scope="col">    New Event Visits    </td>
+    <th scope="col">    About Visits        </td>
+    <th scope="col">    Donate Visits       </td>
+    <th scope="col">    Created New Event   </td>
+    <th scope="col">    Added Attendee      </td>
     </tr>
 
     {% for record in r %}
@@ -42,10 +42,10 @@
     
     <h1>users</h1>
     
-    <table>
+    <table class="table table-bordered">
     <tr>
-    <td>    user_id             </td>
-    <td>    referer                </td>
+    <th scope="col">    user_id             </td>
+    <th scope="col">    referer                </td>
     </tr>
 
     {% for user in u %}
