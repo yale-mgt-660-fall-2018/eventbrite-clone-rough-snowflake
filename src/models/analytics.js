@@ -56,7 +56,8 @@ async function get_analytics(db){
         SUM(CASE WHEN p='donate' THEN 1 ELSE 0 END) AS count_donate, SUM(CASE WHEN p='create_event' THEN 1 ELSE 0 END) AS count_createevent,
         SUM(CASE WHEN p='add_attendee' THEN 1 ELSE 0 END) AS count_addattendee
         FROM users LEFT JOIN pageviews on users.id = pageviews.user_id
-        GROUP BY referer, mod(users.id,2);
+        GROUP BY referer, mod(users.id,2)
+        ORDER BY referer;
     `;
     return db.any(stmt, []);
 }
