@@ -63,8 +63,9 @@ async function get_analytics(db){
 
 async function get_users(db){
     const stmt = `
-        SELECT *
-        FROM users;
+        SELECT count(*)
+        FROM users
+        GROUP BY referer;
     `;
     return db.any(stmt, []);
 }
