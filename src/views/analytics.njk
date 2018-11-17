@@ -44,14 +44,14 @@
     
     <table class="table table-bordered">
     <tr>
-    <th scope="col">    user_id             </td>
-    <th scope="col">    referer                </td>
+    <th scope="col">    referer             </td>
+    <th scope="col">    count                </td>
     </tr>
 
     {% for user in u %}
         <tr>
-        <td>    {{ user.id }}            </td>
-        <td>    {{ user.referer }}         </td>
+        <td>    {{ user.referer }}            </td>
+        <td>    {{ user.count }}         </td>
         </tr>
     
     {% endfor %}
