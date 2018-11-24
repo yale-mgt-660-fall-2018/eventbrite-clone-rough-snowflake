@@ -19,8 +19,8 @@ async function insert_user(db, referer) {
     // and our SQL variables are snake_case. This is a
     // common convention.
     const stmt = `
-        INSERT INTO users (referer)
-        VALUES ($1)
+        INSERT INTO users (referer, visit_date)
+        VALUES ($1, to_timestamp(${Date.now()/1000}))
         RETURNING id, referer
     `;
     return db.one(stmt, [referer]);
@@ -41,8 +41,8 @@ async function insert_pageview(db, user_id, page) {
     // and our SQL variables are snake_case. This is a
     // common convention.
     const stmt = `
-        INSERT INTO pageviews (user_id, p)
-        VALUES ($1, '$2:value') 
+        INSERT INTO pageviews (user_id, p, visit_date)
+        VALUES ($1, '$2:value', to_timestamp(${Date.now()/1000})) 
         RETURNING user_id, p
     `;
     return db.one(stmt, [user_id, page]);
@@ -63,9 +63,9 @@ async function get_analytics(db){
 
 async function get_users(db){
     const stmt = `
-        SELECT count(*) AS count, referer
+        SELECT count(*) AS count, referer, DATE(visit_date) AS visit_date
         FROM users
-        GROUP BY referer;
+        GROUP BY referer, DATE(visit_date);
     `;
     return db.any(stmt, []);
 }

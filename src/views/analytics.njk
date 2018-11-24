@@ -45,12 +45,14 @@
     <table class="table table-bordered">
     <tr>
     <th scope="col">    referer             </td>
+    <th scope="col">    date                </td>
     <th scope="col">    count                </td>
     </tr>
 
     {% for user in u %}
         <tr>
         <td>    {{ user.referer }}            </td>
+        <td>    {{ user.visit_date }}            </td>
         <td>    {{ user.count }}         </td>
         </tr>
     

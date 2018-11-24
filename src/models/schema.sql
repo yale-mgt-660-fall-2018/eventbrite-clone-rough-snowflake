@@ -2,7 +2,7 @@
 --DROP EXTENSION IF EXISTS pgcrypto;
 --CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
---DROP TABLE IF EXISTS events CASCADE;
+DROP TABLE IF EXISTS events CASCADE;
 CREATE TABLE IF NOT EXISTS events (
     -- Integer primary key for events
     id serial PRIMARY KEY,
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS events (
         DEFAULT current_timestamp
 );
 
---DROP TABLE IF EXISTS attendees CASCADE;
+DROP TABLE IF EXISTS attendees CASCADE;
 CREATE TABLE IF NOT EXISTS attendees (
     event_id INT NOT NULL,
     email TEXT
@@ -29,16 +29,18 @@ CREATE TABLE IF NOT EXISTS attendees (
     UNIQUE(event_id,email)
 );
 
---DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE IF NOT EXISTS users (
     id serial PRIMARY KEY,
-    referer TEXT NOT NULL
+    referer TEXT NOT NULL,
+    visit_date TIMESTAMP WITH TIME ZONE
 );
 
---DROP TABLE IF EXISTS pageviews CASCADE;
+DROP TABLE IF EXISTS pageviews CASCADE;
 CREATE TABLE IF NOT EXISTS pageviews (
     user_id INT NOT NULL,
-    p TEXT NOT NULL
+    p TEXT NOT NULL,
+    visit_date TIMESTAMP WITH TIME ZONE
 );
 -- Turn on verbose error messages, which helps our JavaScript
 -- code handle database errors in a graceful manner.
