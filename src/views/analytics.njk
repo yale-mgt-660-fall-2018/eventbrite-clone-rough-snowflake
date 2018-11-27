@@ -29,8 +29,8 @@
         <td>    {{ record.count_home }}         </td>
         <td>    {{ record.count_event }}        </td>
         <td>    {{ record.count_donate }}       </td>
-        <td>    {{ (record.count_event/record.count_home*100) | round }}  </td>
-        <td>    {{ (record.count_donate/record.count_event*100) | round }}  </td>
+        <td>    {{ ((record.count_event/record.count_home*1000) | round)/10 }}% </td>
+        <td>    {{ ((record.count_donate/record.count_event*1000) | round)/10 }}%  </td>
         </tr>
     
     {% endfor %}
