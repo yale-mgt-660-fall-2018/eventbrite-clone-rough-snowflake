@@ -11,11 +11,9 @@
     <th scope="col">    Case                </td>
     <th scope="col">    Home Visits         </td>
     <th scope="col">    Event Page Visits   </td>
-    <th scope="col">    New Event Visits    </td>
-    <th scope="col">    About Visits        </td>
     <th scope="col">    Donate Visits       </td>
-    <th scope="col">    Created New Event   </td>
-    <th scope="col">    Added Attendee      </td>
+    <th scope="col">    Event Rate          </td>
+    <th scope="col">    Donate Rate         </td>
     </tr>
 
     {% for record in r %}
@@ -30,11 +28,9 @@
         </td>
         <td>    {{ record.count_home }}         </td>
         <td>    {{ record.count_event }}        </td>
-        <td>    {{ record.count_newevent }}     </td>
-        <td>    {{ record.count_about }}        </td>
         <td>    {{ record.count_donate }}       </td>
-        <td>    {{ record.count_createevent }}  </td>
-        <td>    {{ record.count_addattendee }}  </td>
+        <td>    {{ record.count_event/record.count_home*100 | round }}  </td>
+        <td>    {{ record.count_donate/record.count_event*100 | round }}  </td>
         </tr>
     
     {% endfor %}
