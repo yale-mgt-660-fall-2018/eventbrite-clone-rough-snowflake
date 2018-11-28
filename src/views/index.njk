@@ -5,9 +5,9 @@
 
 {% block body %}
     <img id="logo" src="https://freedesignfile.com/upload/2013/04/08142828120.jpg">
-        {% for event in events %}
         <ul>
-            <li class="event" id="event-{{event.id}}"><a id="title" href='/events/{{event.id}}'>{{event.title}}</a> - {{event.date}} - {{event.time}} </li>
+        {% for event in events %}
+            <li class="event" id="event-{{event.id}}"><a id="title" href='/events/{{event.id}}'>{{event.title}}</a> - <time>{{event.date}}</time>  </li>
         {% endfor %}
         </ul>
     <a id="new" href='/events/new'>Create New Event</a> 
