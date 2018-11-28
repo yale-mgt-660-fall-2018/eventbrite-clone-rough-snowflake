@@ -9,6 +9,7 @@ const nunjucksEnvironment = new nunjucks.Environment(
     new nunjucks.FileSystemLoader(path.join(__dirname, './views'))
 );
 const init = require('./models/init.js');
+const session = require('koa-session');
 
 
 /**
@@ -28,6 +29,9 @@ function createApp(config) {
     init.createSchema(app.context.db);
     // Set the port for the app
     app.context.port = config.port;
+    
+    app.use(session(app));
+    app.keys = ['secret', 'key'];
     
     // Add view/template engine
     app.use(views(path.join(__dirname, 'views'), {

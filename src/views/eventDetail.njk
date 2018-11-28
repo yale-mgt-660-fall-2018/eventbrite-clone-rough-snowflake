@@ -5,17 +5,25 @@
 
 {% block body %}
     
-    <div> {{eventDetails.title}} </div>
-    <div> {{eventDetails.location}} </div>
-    <div> {{eventDetails.date}} </div>
-    <div> {{eventDetails.image_url}} </div>
+    <ul class="form-errors">
+        {{error}}
+    </ul>
     
+    <h1 id="title"> {{eventDetails.title}} </h1>
+    <span id="location"> {{eventDetails.location}} </span>
+    <span id="date"> {{eventDetails.date}} </span>
+    <img id="image" src="{{eventDetails.image_url}}">
+    <br>
+    <a id="donate" href="/donate">{{donateText.text}}</a>
+    
+    <ul id="attendees">
     {% for attendee in attendees %}
-        <li>{{attendee.email}}</li>
+        <li class="list-group-item">{{attendee.email}}</li>
     {% endfor %}
+    </ul>
     
     <form action="/events/{{eventDetails.id}}" method="post">
-    <input name="email" type="text"/>
+    <input name="email" type="email" id="email"/>
     <br />
     <button type="submit" name="submit" class="btn">Submit</button>
 

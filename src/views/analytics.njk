@@ -1,0 +1,58 @@
+{% extends "template.njk" %}
+
+{% block title %}Analytics{% endblock %}
+
+{% block body %}
+    <h1>Pageviews</h1>
+    
+    <table class="table table-bordered">
+    <tr>
+    <th scope="col">    Referer             </td>
+    <th scope="col">    Case                </td>
+    <th scope="col">    Home Visits         </td>
+    <th scope="col">    Event Page Visits   </td>
+    <th scope="col">    Donate Visits       </td>
+    <th scope="col">    Event Rate          </td>
+    <th scope="col">    Donate Rate         </td>
+    </tr>
+
+    {% for record in r %}
+        <tr>
+        <td>    {{ record.referer }}            </td>
+        <td>
+            {% if record.case == 0 %}
+                Support
+            {% else %}
+                Donate
+            {% endif %}
+        </td>
+        <td>    {{ record.count_home }}         </td>
+        <td>    {{ record.count_event }}        </td>
+        <td>    {{ record.count_donate }}       </td>
+        <td>    {{ ((record.count_event/record.count_home*1000) | round)/10 }}% </td>
+        <td>    {{ ((record.count_donate/record.count_event*1000) | round)/10 }}%  </td>
+        </tr>
+    
+    {% endfor %}
+    </table>
+    
+    <h1>users</h1>
+    
+    <table class="table table-bordered">
+    <tr>
+    <th scope="col">    referer             </td>
+    <th scope="col">    date                </td>
+    <th scope="col">    count                </td>
+    </tr>
+
+    {% for user in u %}
+        <tr>
+        <td>    {{ user.referer }}            </td>
+        <td>    {{ user.visit_date }}            </td>
+        <td>    {{ user.count }}         </td>
+        </tr>
+    
+    {% endfor %}
+    </table>
+    
+{% endblock %}
