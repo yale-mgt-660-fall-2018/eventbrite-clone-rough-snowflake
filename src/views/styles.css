@@ -1,0 +1,16 @@
+/* background color for the content part of the pages */
+Body
+{
+    background-color: white;
+    background: url(https://previews.123rf.com/images/kritchanut/kritchanut1508/kritchanut150800243/43626246-wood-table-top-on-blur-kitchen-background-can-be-used-for-display-or-montage-your-products.jpg) repeat 0 0;
+    font-family: Tahoma, Arial, Helvetica, Sans-Serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Corben', Georgia, Times, serif;
+}
+p, div {
+    font-family: 'Nobile', Helvetica, Arial, sans-serif;
+}
+
+
