@@ -7,12 +7,13 @@ const analyticsModel = require('../models/analytics.js');
  */
 async function index(ctx) {
     const template = 'newEvent.njk';
-    analyticsModel.getSessionId(ctx, "new_event");
+    await analyticsModel.getSessionId(ctx, "new_event");
     return ctx.render(template, { });
 }
 
 async function index1(ctx) {
-    var month = ctx.request.body.month;
+    var month =  ctx.request.body.month;
+    
     const monthsArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let monthAsNumber = '';
     for (let i = 0; i <= 11; i++) {
@@ -21,15 +22,21 @@ async function index1(ctx) {
         }
     }
     const date = monthAsNumber + '/' + ctx.request.body.day + '/' + ctx.request.body.year + ' ' + ctx.request.body.hour + ':' + ctx.request.body.minute;
-    const r = {};
-    try{
-    const r = await eventsModel.insert(ctx.db,ctx.request.body.title,date,ctx.request.body.image,ctx.request.body.location);
-    } catch(e){
+    var r;
+    if (ctx.request.body.title == "" || ctx.request.body.location == "" || ctx.request.body.image == ""){
         const template = 'newEvent.njk';
-        analyticsModel.getSessionId(ctx, "new_event");
+        await analyticsModel.getSessionId(ctx, "new_event");
         return ctx.render(template, { "error": "There was an error in your form" });
     }
-    analyticsModel.getSessionId(ctx, "create_event");
+    
+    try{
+        r = await eventsModel.insert(ctx.db,ctx.request.body.title,date,ctx.request.body.image,ctx.request.body.location);
+    } catch(e){
+         const template = 'newEvent.njk';
+         await analyticsModel.getSessionId(ctx, "new_event");
+         return ctx.render(template, { "error": "There was an error in your form" });
+    }
+    await analyticsModel.getSessionId(ctx, "create_event");
     ctx.redirect('/events/'+(r.id));
 }
 

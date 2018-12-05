@@ -72,6 +72,7 @@ async function getAttendees(db, id) {
     `;
     return db.any(stmt, [id]);
 }
+
 async function addAttendee(db, params) {
     // See pgpromise documentation for this ":value" syntax
     // and why it is used.
@@ -82,6 +83,27 @@ async function addAttendee(db, params) {
     return db.any(stmt, params);
 }
 
+async function getAllEventsAndAttendees(db) {
+    const stmt = `
+        SELECT events.id, events.title, events.date AS time, events.image_url AS image, events.location, ARRAY_AGG(attendees.email) AS attendees 
+        FROM events
+        LEFT JOIN attendees ON events.id = attendees.event_id
+        GROUP BY events.id;
+    `;
+    return db.any(stmt, [])
+}
+
+async function getAllEventsAndAttendeesWithSearch(db, searchValue) {
+    const stmt = `
+        SELECT events.id, events.title, events.date AS time, events.image_url AS image, events.location, ARRAY_AGG(attendees.email) AS attendees 
+        FROM events
+        LEFT JOIN attendees ON events.id = attendees.event_id
+        WHERE events.title LIKE '%` + searchValue + `%'
+        GROUP BY events.id;
+    `;
+    return db.any(stmt, [])
+}
+
 module.exports = {
     insert,
     count,
@@ -89,5 +111,7 @@ module.exports = {
     getById,
     getAllEvents,
     getAttendees,
-    addAttendee
+    addAttendee,
+    getAllEventsAndAttendees,
+    getAllEventsAndAttendeesWithSearch
 };

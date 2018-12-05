@@ -3,17 +3,17 @@
 {% block title %}Analytics{% endblock %}
 
 {% block body %}
-    <table>
+    <h1>Pageviews</h1>
+    
+    <table class="table table-bordered">
     <tr>
-    <td>    Referer             </td>
-    <td>    Case                </td>
-    <td>    Home Visits         </td>
-    <td>    Event Page Visits   </td>
-    <td>    New Event Visits    </td>
-    <td>    About Visits        </td>
-    <td>    Donate Visits       </td>
-    <td>    Created New Event   </td>
-    <td>    Added Attendee      </td>
+    <th scope="col">    Referer             </td>
+    <th scope="col">    Case                </td>
+    <th scope="col">    Home Visits         </td>
+    <th scope="col">    Event Page Visits   </td>
+    <th scope="col">    Donate Visits       </td>
+    <th scope="col">    Event Rate          </td>
+    <th scope="col">    Donate Rate         </td>
     </tr>
 
     {% for record in r %}
@@ -28,13 +28,31 @@
         </td>
         <td>    {{ record.count_home }}         </td>
         <td>    {{ record.count_event }}        </td>
-        <td>    {{ record.count_newevent }}     </td>
-        <td>    {{ record.count_about }}        </td>
         <td>    {{ record.count_donate }}       </td>
-        <td>    {{ record.count_createevent }}  </td>
-        <td>    {{ record.count_addattendee }}  </td>
+        <td>    {{ ((record.count_event/record.count_home*1000) | round)/10 }}% </td>
+        <td>    {{ ((record.count_donate/record.count_event*1000) | round)/10 }}%  </td>
         </tr>
     
     {% endfor %}
     </table>
+    
+    <h1>users</h1>
+    
+    <table class="table table-bordered">
+    <tr>
+    <th scope="col">    referer             </td>
+    <th scope="col">    date                </td>
+    <th scope="col">    count                </td>
+    </tr>
+
+    {% for user in u %}
+        <tr>
+        <td>    {{ user.referer }}            </td>
+        <td>    {{ user.visit_date }}            </td>
+        <td>    {{ user.count }}         </td>
+        </tr>
+    
+    {% endfor %}
+    </table>
+    
 {% endblock %}

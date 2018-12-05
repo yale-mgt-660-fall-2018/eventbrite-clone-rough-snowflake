@@ -6,7 +6,7 @@ const analyticsModel = require('../models/analytics.js');
  */
 async function donate(ctx) {
     const template = 'donate.njk';
-    analyticsModel.getSessionId(ctx, "donate");
+    await analyticsModel.getSessionId(ctx, "donate");
     return ctx.render(template, { });
 }
 

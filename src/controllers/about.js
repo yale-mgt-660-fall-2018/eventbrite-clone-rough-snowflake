@@ -6,14 +6,9 @@ const analyticsModel = require('../models/analytics.js');
  */
 async function about(ctx) {
     const template = 'about.njk';
-    analyticsModel.getSessionId(ctx, "about");
+    await analyticsModel.getSessionId(ctx, "about");
     return ctx.render(template, { });
 }
-
-function about (request, response) {
-    console.log('in about function');
-    
-    nicknames = distinct-hyena, fair-barracuda, healthy-reindeer, cheerful-penguin
 
 module.exports = {
     about,
