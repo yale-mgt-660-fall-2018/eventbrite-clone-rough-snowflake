@@ -12,6 +12,27 @@ async function index(ctx) {
     return ctx.render(template, { events });
 }
 
+//api function
+async function api(ctx) {
+    const template = 'api.njk';
+    //console.log(events);
+    const searchValue = ctx.query.search;
+    if (searchValue == null) {
+        const events = await eventsModel.getAllEventsAndAttendees(ctx.db);
+        const text = JSON.stringify(events);
+        var eventsString = '{ "events" : ' + text + '}';
+        return ctx.render(template, { eventsString });
+    } else {
+        const events = await eventsModel.getAllEventsAndAttendeesWithSearch(ctx.db, searchValue);
+        const text = JSON.stringify(events);
+        var eventsString = '{ "events" : ' + text + '}';
+        //console.log(ctx.query.search);   
+        return ctx.render(template, { eventsString });
+    }
+}
+
+
 module.exports = {
     index,
+    api,
 };
