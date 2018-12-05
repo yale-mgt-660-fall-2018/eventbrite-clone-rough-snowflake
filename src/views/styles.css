@@ -10,11 +10,15 @@ Body
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Corben', Georgia, Times, serif;
+    font-family: Garamond, Georgia, Times, serif;
     font-weight: bold;
 }
 p, div {
-    font-family: 'Nobile', Helvetica, Arial, sans-serif;
+    font-family: Garamond, Helvetica, Arial, sans-serif;
+}
+
+ul, li {
+  list-style-type: square;
 }
 
 img
