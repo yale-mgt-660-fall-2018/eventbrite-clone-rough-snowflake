@@ -110,7 +110,7 @@ function getConfirmation(email) {
     const email_lower = email.toLowerCase();
     const teamNickname = 'rough-snowflake';
     const cc = crypto.createHash('sha256')
-        .update(`${email}-${teamNickname}`)
+        .update(`${email_lower}-${teamNickname}`)
         .digest('hex')
         .substring(0, 7);
     return cc;
