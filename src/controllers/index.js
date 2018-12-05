@@ -22,7 +22,9 @@ async function api(ctx) {
         const text = JSON.stringify(events);
         var eventsString = '{ "events" : ' + text + '}';
         console.log(eventsString);
-        return ctx.render(template, { eventsString });
+        const newObj = JSON.parse(eventsString);
+        console.log(newObj);
+        return ctx.render(template, { newObj });
     } else {
         const events = await eventsModel.getAllEventsAndAttendeesWithSearch(ctx.db, searchValue);
         const text = JSON.stringify(events);
