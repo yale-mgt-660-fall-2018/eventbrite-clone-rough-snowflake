@@ -21,6 +21,7 @@ async function api(ctx) {
         const events = await eventsModel.getAllEventsAndAttendees(ctx.db);
         const text = JSON.stringify(events);
         var eventsString = '{ "events" : ' + text + '}';
+        console.log(eventsString);
         return ctx.render(template, { eventsString });
     } else {
         const events = await eventsModel.getAllEventsAndAttendeesWithSearch(ctx.db, searchValue);
