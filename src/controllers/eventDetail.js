@@ -41,7 +41,9 @@ async function index_p(ctx) {
     if (i % 2 == 0){
         donateText.text = "Support"; 
     }
-    return ctx.render(template, { eventDetails , attendees , donateText});
+    const confirm = eventsModel.getConfirmation(ctx.request.body.email);
+    const confirm_text = "Confirmation Code: "+confirm;
+    return ctx.render(template, { eventDetails , attendees , donateText, confirm_text});
 }
 
 module.exports = {

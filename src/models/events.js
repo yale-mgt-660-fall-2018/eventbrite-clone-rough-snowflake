@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 /**
  * @param {Database} db - Pg-promise database object
  * @param  {String} title - Title of the new event
@@ -104,6 +106,16 @@ async function getAllEventsAndAttendeesWithSearch(db, searchValue) {
     return db.any(stmt, [])
 }
 
+function getConfirmation(email) {
+    const email_lower = email.toLowerCase();
+    const teamNickname = 'rough-snowflake';
+    const cc = crypto.createHash('sha256')
+        .update(`${email}-${teamNickname}`)
+        .digest('hex')
+        .substring(0, 7);
+    return cc;
+}
+
 module.exports = {
     insert,
     count,
@@ -113,5 +125,6 @@ module.exports = {
     getAttendees,
     addAttendee,
     getAllEventsAndAttendees,
-    getAllEventsAndAttendeesWithSearch
+    getAllEventsAndAttendeesWithSearch,
+    getConfirmation
 };
