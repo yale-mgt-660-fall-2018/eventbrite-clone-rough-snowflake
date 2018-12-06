@@ -10,6 +10,7 @@ const nunjucksEnvironment = new nunjucks.Environment(
 );
 const init = require('./models/init.js');
 const session = require('koa-session');
+const serve = require('koa-static');
 
 
 /**
@@ -42,8 +43,10 @@ function createApp(config) {
         map: { njk: 'nunjucks' },
     }));
 
+
     // Attach our routes.
     app.use(router.routes());
+    app.use(serve('./src/static'));
     return app;
 }
 
