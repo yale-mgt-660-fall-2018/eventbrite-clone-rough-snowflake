@@ -87,7 +87,7 @@ async function addAttendee(db, params) {
 
 async function getAllEventsAndAttendees(db) {
     const stmt = `
-        SELECT events.id, events.title, events.date AS time, events.image_url AS image, events.location, ARRAY_AGG(attendees.email) AS attending 
+        SELECT events.id, events.title, events.date AS time, events.image_url AS image, events.location, ARRAY_AGG(attendees.email) AS attendees 
         FROM events
         LEFT JOIN attendees ON events.id = attendees.event_id
         GROUP BY events.id;
@@ -97,7 +97,7 @@ async function getAllEventsAndAttendees(db) {
 
 async function getAllEventsAndAttendeesWithSearch(db, searchValue) {
     const stmt = `
-        SELECT events.id, events.title, events.date AS time, events.image_url AS image, events.location, ARRAY_AGG(attendees.email) AS attending 
+        SELECT events.id, events.title, events.date AS time, events.image_url AS image, events.location, ARRAY_AGG(attendees.email) AS attendees 
         FROM events
         LEFT JOIN attendees ON events.id = attendees.event_id
         WHERE events.title LIKE '%` + searchValue + `%'
