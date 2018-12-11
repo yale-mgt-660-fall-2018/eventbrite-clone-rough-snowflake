@@ -19,18 +19,19 @@ async function api(ctx) {
     const searchValue = ctx.query.search;
     if (searchValue == null) {
         const events = await eventsModel.getAllEventsAndAttendees(ctx.db);
-        const text = JSON.stringify(events);
-        var eventsString = '{ "events" : ' + text + '}';
-        console.log(eventsString);
-        const newObj = JSON.parse(eventsString);
-        console.log(newObj);
-        return ctx.render(template, { newObj });
+        //console.log(events);
+        const text = JSON.stringify(events,null,0);
+        var eventsString = '{"events": ' + text + '}';
+        //console.log(eventsString); 
+        //const newObj = JSON.parse(eventsString);
+        //console.log(newObj);
+        ctx.body = eventsString;
     } else {
         const events = await eventsModel.getAllEventsAndAttendeesWithSearch(ctx.db, searchValue);
         const text = JSON.stringify(events);
-        var eventsString = '{ "events" : ' + text + '}';
+        var eventsString = '{"events": ' + text + '}';
         //console.log(ctx.query.search);   
-        return ctx.render(template, { eventsString });
+        ctx.body = eventsString;
     }
 }
 
